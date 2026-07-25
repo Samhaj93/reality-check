@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    @apply bg-slate-100 text-slate-800 antialiased;
+  }
+
+  /* Visible focus ring on every interactive element — DoD requirement. */
+  :focus-visible {
+    outline: 2px solid #0f766e;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+/*
+ * prefers-reduced-motion (QA P3): kill keyframe animation and scroll motion.
+ * Colour transitions are permitted and left intact; any transform-based motion
+ * uses Tailwind's `motion-reduce:transition-none` variant at the call site.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
