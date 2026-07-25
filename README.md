@@ -4,7 +4,7 @@
 shortlisted units.** It recomputes every unit on one engine and labels where each
 number came from.
 
-🔗 **Live demo:** LIVE_URL_PLACEHOLDER
+🔗 **Live demo: [samhaj93.github.io/reality-check](https://samhaj93.github.io/reality-check/)**
 
 ---
 
