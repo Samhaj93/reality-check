@@ -42,7 +42,11 @@ thing the tool is for. Confidence here means *understanding the deal*, not
 | **Compare** | What do these units look like on one honest basis? Toggle to *Brochure* to see the seller's figures, clearly discredited. |
 | **Cash timeline** | What do I pay, and when, before the first dirham of rent arrives? |
 | **Stress test** | How far can the rent miss its estimate before the deal stops working? |
-| **Decide** | Where does each deal stand against *my* target yield — and what exactly do I ask the agent before signing? |
+| **Decide** | Where does each deal stand against *my* target yield — and what exactly do I ask the agent before signing? Ends by asking you to take a position and emitting a **decision record** you can keep. |
+
+Decide is deliberately not a peer of the other three. They inform; it asks you to
+commit. It is separated in the navigation, rendered as a document rather than a
+tab panel, and it opens by saying it adds no new information.
 
 ## Provenance — the core mechanic
 
@@ -62,6 +66,7 @@ The documents are the substance of this submission; the app demonstrates it.
 2. [Scope decisions](docs/02-scope-decisions.md) — what was cut, why, and how we'd know it's working
 3. [Walkthrough](docs/03-walkthrough.md) — the session, end to end
 4. [If I had another week](docs/04-if-i-had-another-week.md) — the real risks, honestly ranked
+5. [v2 scope note](docs/05-v2-scope-note.md) — a later proposal, what I took from it and what I turned down
 
 [`CLAUDE.md`](CLAUDE.md) holds the engineering constraints the build was held to.
 
@@ -70,7 +75,7 @@ The documents are the substance of this submission; the app demonstrates it.
 ```bash
 npm install
 npm run dev      # http://localhost:5173
-npm test         # 73 tests
+npm test         # 98 tests
 npm run build    # type-check + production build
 ```
 

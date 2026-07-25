@@ -13,11 +13,12 @@ import { AssumptionsFooter } from './components/AssumptionsFooter'
 
 type TabId = 'compare' | 'cash' | 'stress' | 'decide'
 
-const TABS: { id: TabId; label: string }[] = [
+// Three tabs inform; one asks for a position. Rendering them as four identical
+// tabs implied four identical purposes — the structure now says otherwise.
+const INFORM_TABS: { id: TabId; label: string }[] = [
   { id: 'compare', label: 'Compare' },
   { id: 'cash', label: 'Cash timeline' },
   { id: 'stress', label: 'Stress test' },
-  { id: 'decide', label: 'Decide' },
 ]
 
 const DEFAULT_TARGET = 0.035
@@ -72,7 +73,7 @@ export default function App() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-bold tracking-tight text-slate-900">Reality Check</h1>
+              <h1 className="text-2xl font-bold tracking-tight text-brand-ink">Reality Check</h1>
               <span className="rounded-full border border-slate-300 bg-slate-100 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                 Prototype · mock data
               </span>
@@ -100,9 +101,9 @@ export default function App() {
       <div
         role="tablist"
         aria-label="Views"
-        className="mb-4 flex flex-wrap gap-1 border-b border-slate-200"
+        className="mb-4 flex flex-wrap items-center gap-1 border-b border-brand-line"
       >
-        {TABS.map((t) => {
+        {INFORM_TABS.map((t) => {
           const active = tab === t.id
           return (
             <button
@@ -115,14 +116,34 @@ export default function App() {
               className={cx(
                 '-mb-px border-b-2 px-3 py-2 text-sm font-medium transition-colors',
                 active
-                  ? 'border-teal-600 text-slate-900'
-                  : 'border-transparent text-slate-500 hover:text-slate-700',
+                  ? 'border-brand-violet-deep text-brand-ink'
+                  : 'border-transparent text-slate-500 hover:text-brand-ink',
               )}
             >
               {t.label}
             </button>
           )
         })}
+
+        <span aria-hidden="true" className="mx-2 h-5 w-px bg-brand-line" />
+
+        {/* Decide is the commitment step, so it does not look like its peers. */}
+        <button
+          role="tab"
+          id="tab-decide"
+          aria-selected={tab === 'decide'}
+          aria-controls="panel-decide"
+          onClick={() => changeTab('decide')}
+          className={cx(
+            '-mb-px rounded-t-md px-3 py-2 text-sm font-semibold transition-colors',
+            tab === 'decide'
+              ? 'bg-brand-deep text-white'
+              : 'text-brand-violet-deep hover:bg-brand-lavender',
+          )}
+        >
+          Decide
+          <span aria-hidden="true"> →</span>
+        </button>
       </div>
 
       <div id={`panel-${tab}`} role="tabpanel" aria-labelledby={`tab-${tab}`}>

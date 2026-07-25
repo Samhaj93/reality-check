@@ -29,7 +29,7 @@ export function ShortlistBar({ properties, selected, onToggle }: ShortlistBarPro
             className={cx(
               'rounded-full border px-3 py-1.5 text-sm transition-colors',
               isSelected
-                ? 'border-teal-600 bg-teal-600 text-white'
+                ? 'border-brand-violet-deep bg-brand-violet-deep text-white'
                 : 'border-slate-300 bg-white text-slate-600 hover:border-slate-400',
               lockedOn && 'cursor-not-allowed opacity-60',
             )}
