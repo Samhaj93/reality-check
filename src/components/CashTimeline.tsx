@@ -3,6 +3,7 @@ import type { CashSegments } from '../engine/calc'
 import { cashSegments, delayCost, realisticMonths } from '../engine/calc'
 import { aed, cx, months, pct } from '../lib/format'
 import { Figure } from './Figure'
+import { InfoTip } from './InfoTip'
 import { ProvenanceDot } from './ProvenanceDot'
 
 interface SegmentDef {
@@ -90,6 +91,7 @@ function CashCard({ property: p }: { property: Property }) {
         <div>
           <div className="flex items-center gap-1 text-xs uppercase tracking-wide text-slate-400">
             On track record <ProvenanceDot provenance="registry" />
+            <InfoTip term="onTrackRecord" />
           </div>
           <div className="flex items-center gap-2">
             <Figure value={months(realisticMonths(p))} provenance="registry" />
@@ -99,7 +101,9 @@ function CashCard({ property: p }: { property: Property }) {
           </div>
         </div>
         <div>
-          <div className="text-xs uppercase tracking-wide text-slate-400">Delay cost</div>
+          <div className="flex items-center gap-1 text-xs uppercase tracking-wide text-slate-400">
+            Delay cost <InfoTip term="delayCost" />
+          </div>
           <Figure value={aed(delayCost(p))} provenance="estimate" />
           <div className="text-xs text-slate-400">rent foregone while late</div>
         </div>

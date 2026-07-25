@@ -88,4 +88,5 @@ every verdict the docs depend on.
 ## What this cost
 
 Three new engine functions with tests, one new screen treatment, and a palette
-aligned to Xeleration's own. Test count went from 73 to 98. No cut was reversed.
+aligned to Xeleration's own. Test count went from 73 to 98 for this change, and
+stands at 109 after the inline term definitions that followed. No cut was reversed.

@@ -75,7 +75,7 @@ The documents are the substance of this submission; the app demonstrates it.
 ```bash
 npm install
 npm run dev      # http://localhost:5173
-npm test         # 98 tests
+npm test         # 109 tests
 npm run build    # type-check + production build
 ```
 

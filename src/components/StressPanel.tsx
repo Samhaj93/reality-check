@@ -1,6 +1,7 @@
 import type { Property } from '../engine/types'
 import { rentCushion } from '../engine/calc'
 import { aed, cx, pctAbs } from '../lib/format'
+import { InfoTip } from './InfoTip'
 import { ProvenanceDot } from './ProvenanceDot'
 
 // Three net-yield targets, from cautious to ambitious. Each asks the same
@@ -40,7 +41,10 @@ export function StressPanel({ properties }: { properties: Property[] }) {
     <div className="grid gap-4">
       {properties.map((p) => (
         <div key={p.id} className="rounded-lg border border-slate-200 bg-white p-4">
-          <h3 className="mb-3 font-semibold text-slate-900">{p.name}</h3>
+          <h3 className="mb-3 flex items-center gap-1.5 font-semibold text-slate-900">
+            {p.name}
+            <InfoTip term="breakEvenRent" />
+          </h3>
           <ul className="grid gap-2">
             {SCENARIOS.map((s) => {
               const line = stressLine(p, s.target, s.label)

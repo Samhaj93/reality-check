@@ -11,12 +11,17 @@ import {
   serviceCharge,
 } from '../engine/calc'
 import { aed, months, pct } from '../lib/format'
+import type { TermId } from '../lib/glossary'
 import { Figure } from './Figure'
+import { InfoTip } from './InfoTip'
 import { ProvenanceLegend } from './ProvenanceDot'
 
 interface RowDef {
   label: string
   cell: (p: Property, mode: EvidenceMode) => ReactNode
+  // Only on rows a first-time buyer would genuinely stumble on — a tip on every
+  // row would be noise, which is its own kind of unhelpful.
+  term?: TermId
 }
 interface GroupDef {
   title: string
@@ -34,9 +39,14 @@ const GROUPS: GroupDef[] = [
       { label: 'Price', cell: (p) => <Figure value={aed(p.price)} provenance="claim" /> },
       {
         label: 'Price per sqft',
+        term: 'pricePerSqft',
         cell: (p) => <Figure value={aed(pricePerSqft(p))} provenance="claim" />,
       },
-      { label: 'Payment plan', cell: (p) => <Figure value={p.plan} provenance="claim" /> },
+      {
+        label: 'Payment plan',
+        term: 'paymentPlan',
+        cell: (p) => <Figure value={p.plan} provenance="claim" />,
+      },
       {
         label: 'Handover (advertised)',
         cell: (p) => <Figure value={p.handover} provenance="claim" />,
@@ -48,14 +58,17 @@ const GROUPS: GroupDef[] = [
     rows: [
       {
         label: 'Acquisition cost',
+        term: 'acquisitionCost',
         cell: (p) => <Figure value={aed(acquisitionCost(p))} provenance="claim" />,
       },
       {
         label: 'Cash before first rent',
+        term: 'cashBeforeFirstRent',
         cell: (p) => <Figure value={aed(cashBeforeFirstRent(p))} provenance="claim" />,
       },
       {
         label: 'Service charge / yr',
+        term: 'serviceCharge',
         cell: (p) => <Figure value={aed(serviceCharge(p))} provenance="estimate" />,
       },
     ],
@@ -74,6 +87,7 @@ const GROUPS: GroupDef[] = [
       },
       {
         label: 'Gross yield',
+        term: 'grossYield',
         cell: (p, mode) =>
           mode === 'brochure' ? (
             <Figure value={pct(grossYield(p, p.claimRent))} provenance="claim" />
@@ -97,6 +111,7 @@ const GROUPS: GroupDef[] = [
       },
       {
         label: 'Net yield',
+        term: 'netYield',
         cell: (p, mode) => (
           <Figure
             value={pct(netYield(p, activeRent(p, mode)))}
@@ -116,6 +131,7 @@ const GROUPS: GroupDef[] = [
       },
       {
         label: 'Delivered / total',
+        term: 'deliveryRecord',
         cell: (p) => <Figure value={`${p.delivered} / ${p.total}`} provenance="registry" />,
       },
       {
@@ -209,7 +225,10 @@ function GroupRows({
             scope="row"
             className={`${LABEL_CELL} px-3 py-2.5 text-left font-normal text-slate-500`}
           >
-            {row.label}
+            <span className="inline-flex items-center gap-1.5">
+              {row.label}
+              {row.term && <InfoTip term={row.term} />}
+            </span>
           </th>
           {properties.map((p) => (
             <td key={p.id} className="px-3 py-2.5">

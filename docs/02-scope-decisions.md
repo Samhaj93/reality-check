@@ -21,7 +21,7 @@
 | 4 | **Net yield as the headline; gross yield shown struck-through** | Reframes the number the whole industry leads with as the one *not* to decide on. |
 | 5 | **Cash-before-first-rent + payment-plan timeline + delay cost** | Off-plan's real risk isn't price, it's *time and cash exposure before any income*. |
 | 6 | **Stress test as plain-English break-evens** | "Rent can fall 8% below our estimate before this stops working" beats a sensitivity table for a non-expert. |
-| 7 | **Decision panel: decomposed confidence bands + generated agent questions** | Turns judgement into a checklist and a script. The output is *action*, not a verdict. |
+| 7 | **Decide as a destination: decomposed confidence bands, generated agent questions, and a decision record** | Turns judgement into a checklist and a script. The output is *action*, not a verdict — it ends by asking for a position and handing back a record of it. |
 | 8 | **Mock data, 3 units, no accounts, no network** | Enough to prove the thesis; nothing that delays it. |
 
 ## 2. What I deliberately cut — and why
@@ -99,7 +99,7 @@ Tie success to behaviour, not vanity:
 | **Activation** — % of sessions that toggle Brochure→Checked ≥ once | Did they engage the core mechanic at all? |
 | **The "aha"** — % of sessions that *reorder or drop* a shortlisted unit after seeing Checked | Did the tool actually change a decision? This is the north-star proxy. |
 | **Intent to act** — % that copy/export the agent-questions list | Did we convert insight into a next step? |
-| **Resolution** — % of shortlists that reach a clear decision (buy one / walk) in-session | Are we curing the "freeze," not just adding analysis? |
+| **Resolution** — % of shortlists that reach a clear decision (buy one / walk) in-session | Are we curing the "freeze," not just adding analysis? Since the Decide screen now captures the position explicitly, this is **measured rather than inferred** — and the cited figure tells us *which number* resolved it, which is the more useful half. |
 | **Guardrail (counter-metric)** — distribution of verdicts over time | We are *not* a lead-gen funnel and *not* trying to talk everyone out of buying. If everything trends "Fragile," the model is miscalibrated-pessimistic, not honest. |
 
 Explicitly **not** a metric: units favourably rated, agent leads generated. Optimising
@@ -107,6 +107,10 @@ those would corrupt the product's only asset — its honesty.
 
 ## 6. Definition of done (met)
 
-71 automated tests pass (engine values, the ranking-flip thesis, provenance coverage,
+109 automated tests pass (engine values, the ranking-flip thesis, provenance coverage,
 the band-ranking stability, the content grep); `npm run build` is clean; bundle is
-67 kB gzipped. Details in [doc 03](./03-walkthrough.md).
+72 kB gzipped. Details in [doc 03](./03-walkthrough.md).
+
+A later round of changes — reworking Decide, adding the decision record, and turning
+down a listings page and a sign-in screen — is documented separately in
+[doc 05](./05-v2-scope-note.md), which is the scope decision for that proposal.

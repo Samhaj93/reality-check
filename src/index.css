@@ -17,6 +17,16 @@
     @apply bg-brand-lavender text-brand-ink antialiased;
   }
 
+  /*
+   * The compare table's label cells are `sticky z-10`, so each one opens its own
+   * stacking context. A definition panel inside one of them cannot out-stack the
+   * sticky cells of the rows below it, however high its own z-index — it gets
+   * painted over. Lift the whole cell while its panel is open instead.
+   */
+  th:has([data-testid='infotip-panel']) {
+    z-index: 30;
+  }
+
   /* Visible focus ring on every interactive element — DoD requirement. */
   :focus-visible {
     outline: 2px solid #5748b8;

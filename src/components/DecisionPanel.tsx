@@ -13,7 +13,17 @@ import {
 import type { DecisionForm, DriverMetric, Position } from '../engine/decision'
 import { buildDecisionRecord } from '../lib/decisionRecord'
 import { aed, cx, pct } from '../lib/format'
+import type { TermId } from '../lib/glossary'
+import { InfoTip } from './InfoTip'
 import { ProvenanceDot } from './ProvenanceDot'
+
+// Each band is scored on one idea; this is where that idea is explained.
+const BAND_TERM: Record<string, TermId> = {
+  yield: 'netYield',
+  cushion: 'rentCushion',
+  developer: 'deliveryRecord',
+  cash: 'cashBeforeFirstRent',
+}
 
 const VERDICT_TONE: Record<Verdict, string> = {
   Workable: 'bg-teal-100 text-teal-800 border-teal-300',
@@ -319,11 +329,17 @@ function DecisionCard({ property: p, target }: { property: Property; target: num
     >
       <div className="mb-3 flex items-center justify-between gap-2">
         <h3 className="font-semibold text-brand-ink">{p.name}</h3>
-        <span
-          data-testid="verdict"
-          className={cx('rounded-full border px-2.5 py-0.5 text-xs font-semibold', VERDICT_TONE[v])}
-        >
-          {v}
+        <span className="flex shrink-0 items-center gap-1.5">
+          <span
+            data-testid="verdict"
+            className={cx(
+              'rounded-full border px-2.5 py-0.5 text-xs font-semibold',
+              VERDICT_TONE[v],
+            )}
+          >
+            {v}
+          </span>
+          <InfoTip term="verdict" align="right" />
         </span>
       </div>
 
@@ -335,6 +351,7 @@ function DecisionCard({ property: p, target }: { property: Property; target: num
               <span className="flex items-center gap-1.5 text-sm font-medium text-slate-700">
                 {b.label}
                 <ProvenanceDot provenance={b.provenance} />
+                {BAND_TERM[b.key] && <InfoTip term={BAND_TERM[b.key]} />}
               </span>
               <PipMeter score={b.score} />
             </div>
