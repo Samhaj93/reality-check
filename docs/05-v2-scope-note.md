@@ -1,5 +1,5 @@
 # 05 · v2 scope note — what I took, and what I turned down
-
+## V2 is the 2nd version that was developed on Github the document only contains one version v1
 *A v2 proposal arrived after v1 shipped. This is the decision record for the
 proposal itself, which felt like the right way to treat it.*
 
